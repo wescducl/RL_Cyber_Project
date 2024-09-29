@@ -1,0 +1,7 @@
+2024-09-15 12:11:39,439: Using: AgentFramework.CUSTOM, AgentIdentifier.HARDCODED, HardCodedAgentView.FULL, ActionType.NODE, observation_space=NODE_LINK_TABLE, Training: 1 episodes @ 17 stepsEvaluation: 1 episodes @ 17 steps
+2024-09-15 12:11:39,445: Environment configuration loaded
+2024-09-15 12:11:39,607: Welcome to the Primary-level AI Training Environment (PrimAITE) (version: 2.0.0)
+2024-09-15 12:11:39,607: The output directory for this session is: /root/primaite/2.0.0/sessions/2024-09-15/2024-09-15_12-11-39
+2024-09-15 12:11:39,608::WARNING::primaite.agents.hardcoded_abc::68::Deterministic agents cannot learn
+2024-09-15 12:11:39,698: Episode: 1, Average Reward: -15.882352941176471
+Environment configuration loaded

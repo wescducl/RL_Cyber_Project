@@ -1,0 +1,175 @@
+# Stage 2 Laydown File: Two nodes with FTP and SSH services, attacks on both services.
+
+# Node 1: Running FTP service
+- item_type: NODE
+  node_id: '1'
+  name: 'node1'
+  node_class: SERVICE
+  node_type: COMPUTER
+  priority: P1
+  hardware_state: 'ON'
+  ip_address: '192.168.0.1'
+  software_state: 'GOOD'
+  file_system_state: 'GOOD'
+  services:
+    - name: 'ftp'
+      port: '21'
+      state: 'GOOD'
+
+# Node 2: Running SSH service
+- item_type: NODE
+  node_id: '2'
+  name: 'node2'
+  node_class: SERVICE
+  node_type: COMPUTER
+  priority: P2
+  hardware_state: 'ON'
+  ip_address: '192.168.0.2'
+  software_state: 'GOOD'
+  file_system_state: 'GOOD'
+  services:
+    - name: 'ssh'
+      port: '22'
+      state: 'GOOD'
+
+# Attack 1: Compromise FTP service on node1
+- item_type: RED_POL
+  id: '1'
+  start_step: 1
+  end_step: 10
+  targetNodeId: '1'
+  initiator: 'DIRECT'
+  type: 'SERVICE'
+  protocol: 'FTP'
+  state: 'COMPROMISED'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Attack 2: Compromise SSH service on node2
+- item_type: RED_POL
+  id: '2'
+  start_step: 5
+  end_step: 15
+  targetNodeId: '2'
+  initiator: 'DIRECT'
+  type: 'SERVICE'
+  protocol: 'SSH'
+  state: 'COMPROMISED'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Recovery 1: Restore FTP service on node1
+- item_type: RED_POL
+  id: '3'
+  start_step: 10
+  end_step: 20
+  targetNodeId: '1'
+  initiator: 'DIRECT'
+  type: 'SERVICE'
+  protocol: 'FTP'
+  state: 'GOOD'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Recovery 2: Restore SSH service on node2
+- item_type: RED_POL
+  id: '4'
+  start_step: 15
+  end_step: 25
+  targetNodeId: '2'
+  initiator: 'DIRECT'
+  type: 'SERVICE'
+  protocol: 'SSH'
+  state: 'GOOD'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Additional Policies to handle more complex transitions
+
+# Reset node1 after compromise
+- item_type: RED_POL
+  id: '5'
+  start_step: 20
+  end_step: 25
+  targetNodeId: '1'
+  initiator: 'DIRECT'
+  type: 'OPERATING'
+  protocol: 'NA'
+  state: 'OFF'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Turn node1 back ON after reset
+- item_type: RED_POL
+  id: '6'
+  start_step: 25
+  end_step: 30
+  targetNodeId: '1'
+  initiator: 'DIRECT'
+  type: 'OPERATING'
+  protocol: 'NA'
+  state: 'ON'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Ensure full recovery of node1 file system
+- item_type: RED_POL
+  id: '7'
+  start_step: 30
+  end_step: 35
+  targetNodeId: '1'
+  initiator: 'DIRECT'
+  type: 'FILE'
+  protocol: 'NA'
+  state: 'GOOD'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Reset node2 after SSH compromise
+- item_type: RED_POL
+  id: '8'
+  start_step: 25
+  end_step: 30
+  targetNodeId: '2'
+  initiator: 'DIRECT'
+  type: 'OPERATING'
+  protocol: 'NA'
+  state: 'OFF'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Turn node2 back ON after reset
+- item_type: RED_POL
+  id: '9'
+  start_step: 30
+  end_step: 35
+  targetNodeId: '2'
+  initiator: 'DIRECT'
+  type: 'OPERATING'
+  protocol: 'NA'
+  state: 'ON'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Ensure full recovery of node2 file system
+- item_type: RED_POL
+  id: '10'
+  start_step: 35
+  end_step: 40
+  targetNodeId: '2'
+  initiator: 'DIRECT'
+  type: 'FILE'
+  protocol: 'NA'
+  state: 'GOOD'
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'

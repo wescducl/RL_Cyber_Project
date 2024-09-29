@@ -1,0 +1,81 @@
+# Training Config for Reward Shaping (Stage 3)
+
+agent_framework: CUSTOM
+deep_learning_framework: TF2
+agent_identifier: HARDCODED
+random_red_agent: False
+hard_coded_agent_view: FULL
+action_type: NODE
+observation_space:
+  components:
+    - name: NODE_LINK_TABLE
+num_train_episodes: 1000
+num_train_steps: 200
+num_eval_episodes: 1
+num_eval_steps: 17
+checkpoint_every_n_episodes: 10
+time_delay: 5
+session_type: TRAIN_EVAL
+observation_space_high_value: 1000000000
+sb3_output_verbose_level: INFO
+
+# Reward values (adjusted for reward shaping)
+reward_values:
+  all_ok: 0
+  off_should_be_on: -10   # Strong negative reward for incorrect hardware state
+  off_should_be_resetting: -5
+  on_should_be_off: -2
+  on_should_be_resetting: -5
+  resetting_should_be_on: -5
+  resetting_should_be_off: -2
+  resetting: -3
+  good_should_be_patching: 2   # Positive reward for correct patching
+  good_should_be_compromised: 5
+  good_should_be_overwhelmed: 5
+  patching_should_be_good: -5  # Negative reward for wrong patching
+  patching_should_be_compromised: 2
+  patching_should_be_overwhelmed: 2
+  patching: -3
+  compromised_should_be_good: -20   # Severe penalty for compromised state
+  compromised_should_be_patching: -20
+  compromised_should_be_overwhelmed: -20
+  compromised: -20
+  overwhelmed_should_be_good: -20
+  overwhelmed_should_be_patching: -20
+  overwhelmed_should_be_compromised: -20
+  overwhelmed: -20
+  good_should_be_repairing: 2    # Positive reward for repair actions
+  good_should_be_restoring: 2
+  good_should_be_corrupt: 5
+  good_should_be_destroyed: 10
+  repairing_should_be_good: -5
+  repairing_should_be_restoring: 2
+  repairing_should_be_corrupt: 2
+  repairing_should_be_destroyed: 0
+  repairing: -3
+  restoring_should_be_good: -10  # Penalty for incorrect restoring
+  restoring_should_be_repairing: -2
+  restoring_should_be_corrupt: 1
+  restoring_should_be_destroyed: 2
+  restoring: -6
+  corrupt_should_be_good: -10    # Penalty for corrupt state
+  corrupt_should_be_repairing: -10
+  corrupt_should_be_restoring: -10
+  corrupt_should_be_destroyed: 2
+  corrupt: -10
+  destroyed_should_be_good: -20  # Strong penalty for destroyed state
+  destroyed_should_be_repairing: -20
+  destroyed_should_be_restoring: -20
+  destroyed_should_be_corrupt: -20
+  destroyed: -20
+  scanning: -2
+  red_ier_running: -5
+  green_ier_blocked: -10
+
+# Patching / Reset durations
+os_patching_duration: 5
+node_reset_duration: 5
+service_patching_duration: 5
+file_system_repairing_limit: 5
+file_system_restoring_limit: 5
+file_system_scanning_limit: 5

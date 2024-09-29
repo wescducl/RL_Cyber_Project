@@ -1,0 +1,44 @@
+# Stage 1 Laydown: Basic setup with one node running FTP service and minimal attack/recovery sequence
+
+- item_type: NODE
+  node_id: '1'
+  name: 'node1'
+  node_class: SERVICE
+  node_type: COMPUTER
+  priority: P1
+  hardware_state: 'ON'
+  ip_address: '192.168.0.1'
+  software_state: GOOD
+  file_system_state: GOOD
+  services:
+    - name: 'ftp'
+      port: '21'
+      state: 'GOOD'
+
+# Attack: Compromise FTP service on node1 (Simple attack)
+- item_type: RED_POL
+  id: '1'
+  start_step: 1
+  end_step: 3
+  targetNodeId: '1'
+  initiator: DIRECT
+  type: SERVICE
+  protocol: ftp
+  state: COMPROMISED
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'
+
+# Recovery: Restore FTP service on node1
+- item_type: RED_POL
+  id: '2'
+  start_step: 4
+  end_step: 7
+  targetNodeId: '1'
+  initiator: DIRECT
+  type: SERVICE
+  protocol: ftp
+  state: GOOD
+  sourceNodeId: 'NA'
+  sourceNodeService: 'NA'
+  sourceNodeServiceState: 'NA'

@@ -1,0 +1,19 @@
+environment:
+  type: intersection
+  settings:
+    nodes: 10
+    connections: 20
+    attack_scenario: "cyber_attack_scenario_1"
+
+agent:
+  framework: RLLIB
+  identifier: PPO
+  deep_learning_framework: TF2
+  training_parameters:
+    episodes: 1000
+    learning_rate: 0.0003
+    gamma: 0.99
+
+logging:
+  level: DEBUG
+  output_dir: ./logs/rl_policy

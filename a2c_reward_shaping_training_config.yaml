@@ -1,0 +1,111 @@
+# Training Config File
+
+# Sets which agent algorithm framework will be used.
+agent_framework: RLLIB
+
+# Sets which deep learning framework will be used (by RLlib ONLY).
+deep_learning_framework: TF2
+
+# Sets which Agent class will be used.
+agent_identifier: A2C  # Can switch to PPO if needed
+
+# Sets whether Red Agent POL and IER is randomised.
+random_red_agent: False
+
+# Sets what view of the environment the deterministic hardcoded agent has.
+hard_coded_agent_view: FULL
+
+# Sets how the Action Space is defined.
+action_type: NODE
+
+# Observation space
+observation_space:
+  components:
+    - name: NODE_LINK_TABLE
+
+# Number of episodes for training to run per session
+num_train_episodes: 1000
+
+# Number of time steps for training per episode
+num_train_steps: 200
+
+# Number of episodes for evaluation to run per session
+num_eval_episodes: 1
+
+# Number of time steps for evaluation per episode
+num_eval_steps: 17
+
+# Sets how often the agent will save a checkpoint (every n time episodes).
+checkpoint_every_n_episodes: 10
+
+# Time delay (milliseconds) between steps for CUSTOM agents.
+time_delay: 5
+
+# Type of session to be run.
+session_type: TRAIN_EVAL
+
+# Environment config values
+observation_space_high_value: 1000000000
+
+# The Stable Baselines3 learn/eval output verbosity level:
+sb3_output_verbose_level: INFO
+
+# Reward values
+all_ok: 0                        # Neutral reward when everything is fine
+off_should_be_on: -20             # High penalty for being off when it should be on
+off_should_be_resetting: -10      # Moderate penalty for being off when it should be resetting
+on_should_be_off: -5              # Small penalty for being on when it should be off
+on_should_be_resetting: -10       # Moderate penalty for being on when it should be resetting
+resetting_should_be_on: -10       # Moderate penalty for resetting when it should be on
+resetting_should_be_off: -5       # Small penalty for resetting when it should be off
+resetting: -3                     # Small penalty for being in the resetting state
+good_should_be_patching: 5        # Small reward for transitioning to the patching state when needed
+good_should_be_compromised: -30   # High penalty for transitioning to compromised from a good state
+good_should_be_overwhelmed: -30   # High penalty for transitioning to overwhelmed from a good state
+patching_should_be_good: 10       # Strong reward for successfully patching a service back to good
+patching_should_be_compromised: -15 # Penalty for patching but still becoming compromised
+patching_should_be_overwhelmed: -15 # Penalty for patching but still becoming overwhelmed
+patching: 5                       # Reward for being in the patching state
+compromised_should_be_good: -50   # Very high penalty for a compromised state when it should be good
+compromised_should_be_patching: -30 # High penalty for being compromised when patching is possible
+compromised_should_be_overwhelmed: -40 # Very high penalty for letting compromise lead to overwhelmed
+compromised: -50                  # Very severe penalty for remaining in a compromised state
+overwhelmed_should_be_good: -50   # Very high penalty for remaining overwhelmed when it should be good
+overwhelmed_should_be_patching: -30 # High penalty for overwhelmed state when patching is possible
+overwhelmed_should_be_compromised: -30 # Penalty for transitioning from overwhelmed to compromised
+overwhelmed: -50                  # Severe penalty for remaining in overwhelmed state
+good_should_be_repairing: 10      # Reward for transitioning from good to repairing when needed
+good_should_be_restoring: 10      # Reward for restoring a good state
+good_should_be_corrupt: -30       # High penalty for allowing corruption from a good state
+good_should_be_destroyed: -50     # Very high penalty for system destruction from good state
+repairing_should_be_good: 20      # High reward for successfully repairing to a good state
+repairing_should_be_restoring: 5  # Small reward for restoring during repair
+repairing_should_be_corrupt: -20  # Penalty for corruption during repair
+repairing_should_be_destroyed: -30 # Penalty for being destroyed during repair
+repairing: 5                      # Small reward for repairing actions
+restoring_should_be_good: 10      # Reward for restoring to a good state
+restoring_should_be_repairing: 5  # Small reward for repairing during restoring
+restoring_should_be_corrupt: -10  # Penalty for corruption during restoring
+restoring_should_be_destroyed: -20 # Penalty for destruction during restoring
+restoring: -6                     # Penalty for being stuck in the restoring state
+corrupt_should_be_good: -40       # Strong penalty for corruption instead of being good
+corrupt_should_be_repairing: -20  # Moderate penalty for corruption instead of repairing
+corrupt_should_be_restoring: -20  # Moderate penalty for corruption instead of restoring
+corrupt_should_be_destroyed: -50  # Severe penalty for system destruction
+corrupt: -30                      # High penalty for remaining in a corrupt state
+destroyed_should_be_good: -50     # Severe penalty for system being destroyed
+destroyed_should_be_repairing: -30 # Penalty for not repairing after destruction
+destroyed_should_be_restoring: -30 # Penalty for not restoring after destruction
+destroyed_should_be_corrupt: -50  # Severe penalty for remaining destroyed and corrupt
+destroyed: -50                    # Strong penalty for complete system destruction
+scanning: -5                      # Slight penalty for unnecessary scanning
+red_ier_running: -10              # Penalty for red agent running undetected IER
+green_ier_blocked: 20             # High reward for blocking green IER attempts
+
+# Patching / Reset durations
+os_patching_duration: 5
+node_reset_duration: 5
+service_patching_duration: 5
+file_system_repairing_limit: 5
+file_system_restoring_limit: 5
+file_system_scanning_limit: 5

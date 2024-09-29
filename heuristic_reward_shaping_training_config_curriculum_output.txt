@@ -1,0 +1,28 @@
+Running training with heuristic_reward_shaping_training_config.yaml
+Running session with laydown: stage1_laydown.yaml
+2024-09-28 11:19:09,046: Using: AgentFramework.CUSTOM, AgentIdentifier.HARDCODED, HardCodedAgentView.FULL, ActionType.NODE, observation_space=NODE_LINK_TABLE, Training: 1 episodes @ 17 stepsEvaluation: 1 episodes @ 17 steps
+2024-09-28 11:19:09,049: Environment configuration loaded
+2024-09-28 11:19:09,216: Welcome to the Primary-level AI Training Environment (PrimAITE) (version: 2.0.0)
+2024-09-28 11:19:09,216: The output directory for this session is: /root/primaite/2.0.0/sessions/2024-09-28/2024-09-28_11-19-09
+2024-09-28 11:19:09,217::WARNING::primaite.agents.hardcoded_abc::68::Deterministic agents cannot learn
+2024-09-28 11:19:09,307: Episode: 1, Average Reward: -8.823529411764707
+Environment configuration loaded
+Session for stage1_laydown.yaml completed successfully.
+Running session with laydown: stage2_laydown.yaml
+2024-09-28 11:19:13,578: Using: AgentFramework.CUSTOM, AgentIdentifier.HARDCODED, HardCodedAgentView.FULL, ActionType.NODE, observation_space=NODE_LINK_TABLE, Training: 1 episodes @ 17 stepsEvaluation: 1 episodes @ 17 steps
+2024-09-28 11:19:13,585: Environment configuration loaded
+2024-09-28 11:19:13,771: Welcome to the Primary-level AI Training Environment (PrimAITE) (version: 2.0.0)
+2024-09-28 11:19:13,771: The output directory for this session is: /root/primaite/2.0.0/sessions/2024-09-28/2024-09-28_11-19-13
+2024-09-28 11:19:13,772::WARNING::primaite.agents.hardcoded_abc::68::Deterministic agents cannot learn
+2024-09-28 11:19:13,864: Episode: 1, Average Reward: 0.0
+Environment configuration loaded
+Session for stage2_laydown.yaml completed successfully.
+Running session with laydown: stage3_laydown.yaml
+2024-09-28 11:19:18,170: Using: AgentFramework.CUSTOM, AgentIdentifier.HARDCODED, HardCodedAgentView.FULL, ActionType.NODE, observation_space=NODE_LINK_TABLE, Training: 1 episodes @ 17 stepsEvaluation: 1 episodes @ 17 steps
+2024-09-28 11:19:18,175: Environment configuration loaded
+2024-09-28 11:19:18,345: Welcome to the Primary-level AI Training Environment (PrimAITE) (version: 2.0.0)
+2024-09-28 11:19:18,346: The output directory for this session is: /root/primaite/2.0.0/sessions/2024-09-28/2024-09-28_11-19-18
+2024-09-28 11:19:18,347::WARNING::primaite.agents.hardcoded_abc::68::Deterministic agents cannot learn
+2024-09-28 11:19:18,437: Episode: 1, Average Reward: -15.882352941176471
+Environment configuration loaded
+Session for stage3_laydown.yaml completed successfully.

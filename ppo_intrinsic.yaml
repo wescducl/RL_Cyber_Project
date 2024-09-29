@@ -1,0 +1,120 @@
+# Training Config File with Curiosity-based Intrinsic Motivation
+
+# Sets which agent algorithm framework will be used.
+agent_framework: RLLIB
+
+# Sets which deep learning framework will be used (by RLlib ONLY).
+deep_learning_framework: TF2
+
+# Sets which Agent class will be used.
+agent_identifier: PPO  # Using PPO for stable results
+
+# Sets whether Red Agent POL and IER is randomised.
+random_red_agent: False
+
+# Sets what view of the environment the deterministic hardcoded agent has.
+hard_coded_agent_view: FULL
+
+# Sets how the Action Space is defined.
+action_type: NODE
+
+# Observation space
+observation_space:
+  components:
+    - name: NODE_LINK_TABLE
+
+# Exploration and intrinsic motivation (curiosity-based)
+exploration_config:
+  type: Curiosity  # Use the curiosity exploration strategy
+  eta: 1.0  # Scaling factor for intrinsic reward
+  feature_dim: 64  # Size of the feature vector used in the ICM module
+  beta: 0.2  # Weight of intrinsic reward vs extrinsic reward
+  lr: 0.001  # Learning rate for the ICM module
+  training_intensity: 1  # How frequently the ICM module is trained
+
+# Number of episodes for training to run per session
+num_train_episodes: 1000
+
+# Number of time steps for training per episode
+num_train_steps: 200
+
+# Number of episodes for evaluation to run per session
+num_eval_episodes: 1
+
+# Number of time steps for evaluation per episode
+num_eval_steps: 17
+
+# Sets how often the agent will save a checkpoint (every n time episodes).
+checkpoint_every_n_episodes: 10
+
+# Time delay (milliseconds) between steps for CUSTOM agents.
+time_delay: 5
+
+# Type of session to be run.
+session_type: TRAIN_EVAL
+
+# Environment config values
+observation_space_high_value: 1000000000
+
+# The Stable Baselines3 learn/eval output verbosity level:
+sb3_output_verbose_level: INFO
+
+# Reward values
+all_ok: 0
+off_should_be_on: -10
+off_should_be_resetting: -5
+on_should_be_off: -2
+on_should_be_resetting: -5
+resetting_should_be_on: -5
+resetting_should_be_off: -2
+resetting: -3
+good_should_be_patching: 2
+good_should_be_compromised: 5
+good_should_be_overwhelmed: 5
+patching_should_be_good: -5
+patching_should_be_compromised: 2
+patching_should_be_overwhelmed: 2
+patching: -3
+compromised_should_be_good: -20
+compromised_should_be_patching: -20
+compromised_should_be_overwhelmed: -20
+compromised: -20
+overwhelmed_should_be_good: -20
+overwhelmed_should_be_patching: -20
+overwhelmed_should_be_compromised: -20
+overwhelmed: -20
+good_should_be_repairing: 2
+good_should_be_restoring: 2
+good_should_be_corrupt: 5
+good_should_be_destroyed: 10
+repairing_should_be_good: -5
+repairing_should_be_restoring: 2
+repairing_should_be_corrupt: 2
+repairing_should_be_destroyed: 0
+repairing: -3
+restoring_should_be_good: -10
+restoring_should_be_repairing: -2
+restoring_should_be_corrupt: 1
+restoring_should_be_destroyed: 2
+restoring: -6
+corrupt_should_be_good: -10
+corrupt_should_be_repairing: -10
+corrupt_should_be_restoring: -10
+corrupt_should_be_destroyed: 2
+corrupt: -10
+destroyed_should_be_good: -20
+destroyed_should_be_repairing: -20
+destroyed_should_be_restoring: -20
+destroyed_should_be_corrupt: -20
+destroyed: -20
+scanning: -2
+red_ier_running: -5
+green_ier_blocked: -10
+
+# Patching / Reset durations
+os_patching_duration: 5
+node_reset_duration: 5
+service_patching_duration: 5
+file_system_repairing_limit: 5
+file_system_restoring_limit: 5
+file_system_scanning_limit: 5
